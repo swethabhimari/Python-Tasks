@@ -6,8 +6,11 @@ class VoiceAssistance:
     def voice(self):
         print("voice control enabled")
 class SmartSpeaker(WifiDevice,VoiceAssistance):
-    def display(self):
+    def display(self):#overriding
         print("Smart Speaker ready")
+    def display(self):
+        print("Smart Speaker enabled")
+    
 s=SmartSpeaker()
 s.wifi()
 s.voice()
