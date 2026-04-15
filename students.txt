@@ -1,0 +1,2 @@
+Students above 50 marks:['Ravi', 'Ramu', 'John']
+Average Marks:57.0

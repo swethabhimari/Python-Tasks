@@ -1,0 +1,5 @@
+login success
+viewed pag
+ERROR:Payment failed
+INFO:Logout
+ERROR:Server down
