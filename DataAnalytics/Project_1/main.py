@@ -3,7 +3,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # load CSV file
-df = pd.read_csv('railway_gauges.csv')
+# df = pd.read_csv('railway_gauges.csv')
+df = pd.read_csv(r'C:\Users\DELL\Documents\Python\DataAnalytics\Project_1\railway_gauges.csv')
 
 print(df.head())
 
