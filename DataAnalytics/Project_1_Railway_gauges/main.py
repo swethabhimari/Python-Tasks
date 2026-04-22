@@ -1,50 +1,59 @@
+#=======================================================================================
+#Project Title:Railway Gauges
+#=======================================================================================
+
 # import libraries
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
-#---------------------------------------------------------------------------------------
+#======================================================================================
 #  Scenario-1--Basic Data Loading & Cleaning
-# --------------------------------------------------------------------------------------
+#=======================================================================================
+#1. Load the dataset into a Pandas DataFrame.
+#2. Display the first 5 rows and column names.
+#3. Check for missing values and replace them with 0.
+#4. Convert all gauge columns (Broad, Metre, Narrow, Total) to numeric types.
+#=======================================================================================
+
 # 1.1 Load the dataset
 df = pd.read_csv('railway_gauges.csv')
-
 # 1.2 Display first 5 rows
 print("First 5 rows of the dataset:")
 #view sample data
 print(df.head())
-
 # Display column names
 print("\nColumn names in the dataset:")
 #checks column
 print(df.columns)
-
 # 1.3 Check for missing values
 print("\nMissing values in each column:")
 # missing values check
 print(df.isnull().sum())
-
 # Replace missing values with 0
 df.fillna(0, inplace=True)
-
 print("\nMissing values after replacing with 0:")
 print(df.isnull().sum())
-
 # 1.4 Convert gauge columns to numeric type
 gauge_columns = ['Broad Gauge', 'Metre Gauge', 'Narrow Gauge', 'Total']
-
 for col in gauge_columns:
     df[col] = pd.to_numeric(df[col], errors='coerce')
-
 # Replace any NaN created during conversion(clean NaN)
 df.fillna(0, inplace=True)
-
 print("\nData types after conversion:")
 print(df.dtypes)
 
 
-#---------------------------------------------------------------------------------------
+#======================================================================================
 #  Scenario-2--Simple Visualization
-# --------------------------------------------------------------------------------------
+#======================================================================================
+# 1. Extract Year and Total columns.
+# 2. Plot a line graph showing Total tracks over years.
+# 3. Add:
+# ○ Title
+# ○ X and Y labels
+# 4. Identify whether the trend is increasing or decreasing
+#=======================================================================================
+
 #2.1 Extract Year and Total columns
 # 2.1 Select required columns (Year and Total tracks)
 data = df[['Year', 'Total']].copy()
@@ -82,9 +91,16 @@ print(data.head())
 print("\nFinal Observation:")
 print("The trend is increasing (Railway track length is growing over the years)")
 
-#---------------------------------------------------------------------------------------
+#======================================================================================
 #  Scenario-3--Filtering & Bar Chart
-#--------------------------------------------------------------------------------------
+#======================================================================================
+# 1. Filter the dataset for years after 2000.
+# 2. Select Broad Gauge, Metre Gauge, and Narrow Gauge.
+# 3. Plot a grouped bar chart comparing all three gauges.
+# 4. Add legend and proper labels.
+# 5. Identify which gauge dominates in recent years.
+#======================================================================================
+
 # 3.1 Filter the dataset for years after 2000
 df['Year'] = df['Year'].str[:4].astype(int)
 recent_df = df[df['Year'] > 2000]
@@ -118,9 +134,15 @@ plt.show()
 print("Broad Gauge dominates in recent years")
 
 
-#---------------------------------------------------------------------------------------
+#======================================================================================
 #Scenario 4: Feature Engineering + Pie Chart
-#---------------------------------------------------------------------------------------
+#======================================================================================
+# 1. Calculate total sum of each gauge across all years.
+# 2. Create a new structure (Series/DataFrame) for totals.
+# 3. Plot a pie chart showing percentage contribution.
+# 4. Add percentage labels (autopct).
+# 5. Interpret which gauge contributes the most.
+#======================================================================================
 
 # 4.1 Calculate total sum of each gauge across all years
 totals = df[['Broad Gauge','Metre Gauge','Narrow Gauge']].sum()
@@ -148,10 +170,23 @@ plt.show()
 print("Highest contributing gauge:", totals.idxmax())
 
 
-#---------------------------------------------------------------------------------------
+#======================================================================================
 #Scenario 5: Advanced Analysis + Multiple Graphs
-#---------------------------------------------------------------------------------------
-
+#======================================================================================
+# 1. Create new columns:
+# ○ % Broad Gauge
+# ○ % Metre Gauge
+# ○ % Narrow Gauge
+# 2. Use NumPy (np.diff) to calculate yearly growth of Total tracks.
+# 3. Plot:
+# ○ Line graph for all gauges
+# ○ Stacked bar chart showing composition
+# 4. Highlight:
+# ○ Years with highest growth
+# ○ Decline in any gauge
+# 5. Provide a final conclusion:
+# �� “Is the railway system shifting towards a single dominant gauge?
+#======================================================================================
 
 # 5.1 Create new columns:
 #    % Broad Gauge, % Metre Gauge, % Narrow Gauge
