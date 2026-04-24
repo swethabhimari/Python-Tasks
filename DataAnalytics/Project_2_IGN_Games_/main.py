@@ -276,4 +276,4 @@ print("Year with highest average score:", best_year)
 
 # Correlation with editors_choice
 correlation = df["score"].corr(df["editors_choice"])
-print("Correlation between score and editors_choice:", correlation)
+# print("Correlation between score and editors_choice:", correlation)
