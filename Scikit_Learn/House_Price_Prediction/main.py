@@ -160,3 +160,35 @@ model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 
 evaluate("Ridge Regression", y_test, y_pred)
+# ============================================================
+# 8. LASSO REGRESSION
+# ============================================================
+from sklearn.linear_model import Lasso
+
+model = Lasso(alpha=0.1)
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+evaluate("Lasso Regression", y_test, y_pred)
+
+# ============================================================
+# 9. ELASTIC NET
+# ============================================================
+from sklearn.linear_model import ElasticNet
+
+model = ElasticNet(alpha=0.1, l1_ratio=0.5)
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+evaluate("ElasticNet Regression", y_test, y_pred)
+
+# ============================================================
+# 10. XGBOOST
+# ============================================================
+# Run this once in terminal if not installed:
+# pip install xgboost
+
+from xgboost import XGBRegressor
+
+model = XGBRegressor()
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+evaluate("XGBoost", y_test, y_pred)
